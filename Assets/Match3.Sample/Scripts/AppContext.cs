@@ -29,6 +29,14 @@ public class AppContext : MonoBehaviour//, IAppContext
         RegisterInstance<IBoardFillStrategy<IUnityGridSlot>[]>(GetBoardFillStrategies());
     }
 
+    public void Destruct()
+    {
+        var unityGame = Resolve<UnityGame>();
+        var itemGenerator = Resolve<IUnityItemGenerator>();
+        unityGame.Dispose();
+        itemGenerator.Dispose();
+    }
+    
     private Dictionary<Type, object> _registeredTypes;
 
     public T Resolve<T>()

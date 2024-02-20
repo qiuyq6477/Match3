@@ -46,10 +46,7 @@ public class App : MonoBehaviour
 
     private void OnDestroy()
     {
-        foreach (var gameMode in _gameModes)
-        {
-            gameMode.Dispose();
-        }
+        _appContext.Destruct();
     }
 
     private void OnGameModeFinished(object sender, EventArgs e)

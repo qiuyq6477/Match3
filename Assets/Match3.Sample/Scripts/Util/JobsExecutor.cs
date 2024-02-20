@@ -5,7 +5,7 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using Match3;
 
-namespace Match3.Internal
+namespace Match3
 {
     internal class JobsExecutor
     {

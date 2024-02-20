@@ -5,7 +5,7 @@ using Match3.Core;
 using Match3;
 using Match3;
 
-namespace Match3.Internal
+namespace Match3
 {
     internal class GameBoard<TGridSlot> : IGameBoard<TGridSlot>, IDisposable where TGridSlot : IGridSlot
     {

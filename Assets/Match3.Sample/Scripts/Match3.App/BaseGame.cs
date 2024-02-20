@@ -3,7 +3,7 @@ using Match3;
 using Match3;
 using Match3;
 
-namespace Match3.Internal
+namespace Match3
 {
     public abstract class BaseGame<TGridSlot> : IDisposable where TGridSlot : IGridSlot
     {

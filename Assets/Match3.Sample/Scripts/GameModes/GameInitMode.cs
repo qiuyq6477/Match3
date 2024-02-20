@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Match3
 {
-    public class GameInitMode : IGameMode, IDisposable
+    public class GameInitMode : IGameMode
     {
         private readonly UnityGame _unityGame;
         private readonly AppContext _appContext;
@@ -43,12 +43,6 @@ namespace Match3
 
         public void Deactivate()
         {
-        }
-
-        public void Dispose()
-        {
-            _unityGame.Dispose();
-            _itemGenerator.Dispose();
         }
 
         private void Init(int level)

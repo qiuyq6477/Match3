@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Match3;
-using Match3.Internal;
+using Match3;
 using Match3;
 using Match3;
 
