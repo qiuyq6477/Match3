@@ -1,22 +1,19 @@
 using System;
-using Common.Interfaces;
+using Match3;
 using Cysharp.Threading.Tasks;
-using Match3.App;
-using Match3.App.Interfaces;
-using Match3.Infrastructure.Interfaces;
 
-namespace Common.GameModes
+namespace Match3
 {
     public class GamePlayMode : IGameMode, IDeactivatable
     {
         private readonly UnityGame _unityGame;
-        private readonly IGameUiCanvas _gameUiCanvas;
+        private readonly GameUiCanvas _gameUiCanvas;
         private readonly IBoardFillStrategy<IUnityGridSlot>[] _boardFillStrategies;
 
-        public GamePlayMode(IAppContext appContext)
+        public GamePlayMode(AppContext appContext)
         {
             _unityGame = appContext.Resolve<UnityGame>();
-            _gameUiCanvas = appContext.Resolve<IGameUiCanvas>();
+            _gameUiCanvas = appContext.Resolve<GameUiCanvas>();
             _boardFillStrategies = appContext.Resolve<IBoardFillStrategy<IUnityGridSlot>[]>();
         }
 

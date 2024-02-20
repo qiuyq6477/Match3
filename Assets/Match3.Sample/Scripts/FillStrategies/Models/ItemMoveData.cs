@@ -1,7 +1,7 @@
-﻿using Common.Interfaces;
+﻿using Match3;
 using UnityEngine;
 
-namespace FillStrategies.Models
+namespace Match3
 {
     public class ItemMoveData
     {

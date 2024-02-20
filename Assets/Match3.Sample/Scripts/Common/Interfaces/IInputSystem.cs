@@ -1,12 +1,12 @@
 using System;
-using Common.Models;
+using Match3;
 
-namespace Common.Interfaces
+namespace Match3
 {
-    public interface IInputSystem
-    {
-        event EventHandler<PointerEventArgs> PointerDown;
-        event EventHandler<PointerEventArgs> PointerDrag;
-        event EventHandler<PointerEventArgs> PointerUp;
-    }
+    // public interface IInputSystem
+    // {
+    //     event EventHandler<PointerEventArgs> PointerDown;
+    //     event EventHandler<PointerEventArgs> PointerDrag;
+    //     event EventHandler<PointerEventArgs> PointerUp;
+    // }
 }

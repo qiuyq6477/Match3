@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.U2D;
 
-namespace Common.Extensions
+namespace Match3
 {
     public static class SpriteAtlasExtensions
     {

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Common.Models
+namespace Match3
 {
     public class PointerEventArgs : System.EventArgs
     {

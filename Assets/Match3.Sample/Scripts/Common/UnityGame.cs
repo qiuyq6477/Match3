@@ -1,22 +1,22 @@
 using System.Collections.Generic;
-using Common.Interfaces;
-using Common.Models;
+using Match3;
+using Match3;
 using Cysharp.Threading.Tasks;
-using Match3.App;
-using Match3.Core.Structs;
+using Match3;
+using Match3;
 using UnityEngine;
 
-namespace Common
+namespace Match3
 {
     public class UnityGame : Match3Game<IUnityGridSlot>
     {
-        private readonly IInputSystem _inputSystem;
-        private readonly IUnityGameBoardRenderer _gameBoardRenderer;
+        private readonly CanvasInputSystem _inputSystem;
+        private readonly UnityGameBoardRenderer _gameBoardRenderer;
 
         private bool _isDragMode;
         private GridPosition _slotDownPosition;
 
-        public UnityGame(IInputSystem inputSystem, IUnityGameBoardRenderer gameBoardRenderer,
+        public UnityGame(CanvasInputSystem inputSystem, UnityGameBoardRenderer gameBoardRenderer,
             GameConfig<IUnityGridSlot> config) : base(config)
         {
             _inputSystem = inputSystem;

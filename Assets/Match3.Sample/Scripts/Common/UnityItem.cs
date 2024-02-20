@@ -1,7 +1,7 @@
-using Common.Interfaces;
+using Match3;
 using UnityEngine;
 
-namespace Common
+namespace Match3
 {
     public class UnityItem : MonoBehaviour, IUnityItem
     {

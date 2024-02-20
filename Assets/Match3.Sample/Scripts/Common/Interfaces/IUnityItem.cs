@@ -1,8 +1,8 @@
 using System;
-using Match3.Core.Interfaces;
+using Match3;
 using UnityEngine;
 
-namespace Common.Interfaces
+namespace Match3
 {
     public interface IUnityItem : IDisposable
     {

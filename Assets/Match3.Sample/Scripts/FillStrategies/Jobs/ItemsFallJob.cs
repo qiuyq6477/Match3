@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Threading;
-using Common.Extensions;
-using Common.Interfaces;
+using Match3;
+using Match3;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
-using FillStrategies.Models;
+using Match3;
 
-namespace FillStrategies.Jobs
+namespace Match3
 {
     public class ItemsFallJob : MoveJob
     {

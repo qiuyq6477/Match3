@@ -1,7 +1,5 @@
 using System;
-using Common.GameModes;
-using Match3.Infrastructure.Extensions;
-using Match3.Infrastructure.Interfaces;
+using Match3;
 using UnityEngine;
 
 public class App : MonoBehaviour

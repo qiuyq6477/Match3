@@ -1,7 +1,7 @@
-using Match3.Core.Interfaces;
+using Match3;
 using UnityEngine;
 
-namespace Common.GridTiles
+namespace Match3
 {
     public abstract class StatefulGridTile : SpriteGridTile, IStatefulSlot
     {

@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Common.UiElements
+namespace Match3
 {
     public class InteractableDropdown : MonoBehaviour
     {

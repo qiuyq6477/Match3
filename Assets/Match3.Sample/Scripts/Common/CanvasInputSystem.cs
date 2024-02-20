@@ -1,12 +1,12 @@
 ﻿using System;
-using Common.Interfaces;
-using Common.Models;
+using Match3;
+using Match3;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Common
+namespace Match3
 {
-    public class CanvasInputSystem : MonoBehaviour, IInputSystem
+    public class CanvasInputSystem : MonoBehaviour//, IInputSystem
     {
         [SerializeField] private Camera _camera;
         [SerializeField] private EventTrigger _eventTrigger;

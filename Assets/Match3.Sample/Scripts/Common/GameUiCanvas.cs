@@ -1,15 +1,15 @@
 using System;
 using System.Linq;
-using Common.Interfaces;
-using Common.Models;
-using Common.UiElements;
-using Match3.App;
-using Match3.App.Interfaces;
+using Match3;
+using Match3;
+using Match3;
+using Match3;
+using Match3;
 using UnityEngine;
 
-namespace Common
+namespace Match3
 {
-    public class GameUiCanvas : MonoBehaviour, IGameUiCanvas
+    public class GameUiCanvas : MonoBehaviour//, IGameUiCanvas
     {
         [SerializeField] private AppContext _appContext;
         [SerializeField] private InteractableDropdown _iconsSetDropdown;

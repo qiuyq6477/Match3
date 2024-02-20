@@ -1,8 +1,8 @@
 using System;
-using Common.Enums;
+using Match3;
 using UnityEngine;
 
-namespace Common.Models
+namespace Match3
 {
     [Serializable]
     public class TileModel

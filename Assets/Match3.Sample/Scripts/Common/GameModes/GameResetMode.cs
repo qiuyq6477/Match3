@@ -1,21 +1,20 @@
 using System;
-using Common.Extensions;
-using Common.Interfaces;
-using Match3.Infrastructure.Interfaces;
+using Match3;
+using Match3;
 
-namespace Common.GameModes
+namespace Match3
 {
     public class GameResetMode : IGameMode
     {
         private readonly UnityGame _unityGame;
         private readonly IItemsPool<IUnityItem> _itemsPool;
-        private readonly IUnityGameBoardRenderer _gameBoardRenderer;
+        private readonly UnityGameBoardRenderer _gameBoardRenderer;
 
-        public GameResetMode(IAppContext appContext)
+        public GameResetMode(AppContext appContext)
         {
             _unityGame = appContext.Resolve<UnityGame>();
             _itemsPool = appContext.Resolve<IItemsPool<IUnityItem>>();
-            _gameBoardRenderer = appContext.Resolve<IUnityGameBoardRenderer>();
+            _gameBoardRenderer = appContext.Resolve<UnityGameBoardRenderer>();
         }
 
         public event EventHandler Finished;

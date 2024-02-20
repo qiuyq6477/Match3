@@ -1,12 +1,12 @@
 using System.Collections.Generic;
-using Common.Enums;
-using Common.Extensions;
-using Common.Interfaces;
-using Common.Models;
-using Match3.Core.Interfaces;
+using Match3;
+using Match3;
+using Match3;
+using Match3;
+using Match3;
 using UnityEngine;
 
-namespace Common
+namespace Match3
 {
     public class TileItemsPool
     {

@@ -1,15 +1,15 @@
 using System;
-using Common.Enums;
-using Common.Interfaces;
-using Common.Models;
-using Match3.App.Interfaces;
+using Match3;
+using Match3;
+using Match3;
+using Match3;
 using Match3.Core;
-using Match3.Core.Structs;
+using Match3;
 using UnityEngine;
 
-namespace Common
+namespace Match3
 {
-    public class UnityGameBoardRenderer : MonoBehaviour, IUnityGameBoardRenderer, IGameBoardDataProvider<IUnityGridSlot>
+    public class UnityGameBoardRenderer : MonoBehaviour, IGameBoardDataProvider<IUnityGridSlot>// , IUnityGameBoardRenderer
     {
         [Space]
         [SerializeField] private int _rowCount = 9;
@@ -137,7 +137,7 @@ namespace Common
             {
                 for (var columnIndex = 0; columnIndex < _columnCount; columnIndex++)
                 {
-                    var gridTile = GetTile(rowIndex, columnIndex, defaultTileGroup);
+                    var gridTile = NewTile(rowIndex, columnIndex, defaultTileGroup);
 
                     _gridSlotTiles[rowIndex, columnIndex] = gridTile;
                     _gameBoardSlots[rowIndex, columnIndex] =
@@ -165,16 +165,16 @@ namespace Common
                 _tileItemsPool.ReturnGridTile(currentTile);
             }
 
-            var gridTile = GetTile(rowIndex, columnIndex, group);
+            var gridTile = NewTile(rowIndex, columnIndex, group);
 
             _gridSlotTiles[rowIndex, columnIndex] = gridTile;
             _gameBoardSlots[rowIndex, columnIndex].SetState(gridTile);
         }
 
-        private IGridTile GetTile(int rowIndex, int columnIndex, TileGroup group)
+        private IGridTile NewTile(int rowIndex, int columnIndex, TileGroup group)
         {
             var gridTile = _tileItemsPool.GetGridTile(group);
-            gridTile.SetWorldPosition(GetWorldPosition(rowIndex, columnIndex));
+            gridTile.SetWorldPosition(rowIndex, columnIndex, GetWorldPosition(rowIndex, columnIndex));
 
             return gridTile;
         }

@@ -1,18 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Common;
-using Common.Interfaces;
-using Common.Models;
-using Common.SpecialItemDetectors;
-using FillStrategies;
-using Match3.App;
-using Match3.App.Interfaces;
-using Match3.Infrastructure;
-using Match3.Infrastructure.Interfaces;
-using Match3.Infrastructure.SequenceDetectors;
+using Match3;
 using UnityEngine;
 
-public class AppContext : MonoBehaviour, IAppContext
+public class AppContext : MonoBehaviour//, IAppContext
 {
     [SerializeField] private GameUiCanvas _gameUiCanvas;
     [SerializeField] private CanvasInputSystem _inputSystem;
@@ -28,12 +19,12 @@ public class AppContext : MonoBehaviour, IAppContext
     {
         _registeredTypes = new Dictionary<Type, object>();
 
-        RegisterInstance<IInputSystem>(_inputSystem);
-        RegisterInstance<IconsSetModel[]>(_iconSets);
-        RegisterInstance<IGameUiCanvas>(_gameUiCanvas);
-        RegisterInstance<IUnityGameBoardRenderer, IGameBoardDataProvider<IUnityGridSlot>>(_gameBoardRenderer);
+        RegisterInstance(_inputSystem);
+        RegisterInstance(_iconSets);
+        RegisterInstance(_gameUiCanvas);
+        RegisterInstance<UnityGameBoardRenderer, IGameBoardDataProvider<IUnityGridSlot>>(_gameBoardRenderer);
 
-        RegisterInstance<UnityGame>(GetUnityGame());
+        RegisterInstance(GetUnityGame());
         RegisterInstance<IUnityItemGenerator, IItemsPool<IUnityItem>>(GetItemGenerator());
         RegisterInstance<IBoardFillStrategy<IUnityGridSlot>[]>(GetBoardFillStrategies());
     }

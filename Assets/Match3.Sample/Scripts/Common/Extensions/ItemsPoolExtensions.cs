@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using Common.Interfaces;
-using Match3.Infrastructure.Interfaces;
+using Match3;
+using Match3;
 
-namespace Common.Extensions
+namespace Match3
 {
     public static class ItemsPoolExtensions
     {

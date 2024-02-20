@@ -1,6 +1,6 @@
-using Common.Enums;
+using Match3;
 
-namespace Common.GridTiles.States
+namespace Match3
 {
     public class StoneState : StatefulGridTile
     {

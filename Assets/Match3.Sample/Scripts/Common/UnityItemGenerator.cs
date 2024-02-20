@@ -1,10 +1,9 @@
-using Common.Extensions;
-using Common.Interfaces;
-using Match3.Infrastructure;
+using Match3;
+using Match3;
 using UnityEngine;
 using Random = System.Random;
 
-namespace Common
+namespace Match3
 {
     public class UnityItemGenerator : ItemGenerator<IUnityItem>, IUnityItemGenerator
     {

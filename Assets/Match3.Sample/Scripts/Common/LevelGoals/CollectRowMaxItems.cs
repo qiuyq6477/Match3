@@ -1,10 +1,10 @@
-using Common.Interfaces;
-using Match3.App;
-using Match3.App.Interfaces;
-using Match3.Infrastructure.SequenceDetectors;
+using Match3;
+using Match3;
+using Match3;
+using Match3;
 using UnityEngine;
 
-namespace Common.LevelGoals
+namespace Match3
 {
     public class CollectRowMaxItems : LevelGoal<IUnityGridSlot>
     {

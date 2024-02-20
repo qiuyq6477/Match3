@@ -1,12 +1,12 @@
 using System;
-using Match3.Core.Interfaces;
+using Match3;
 using UnityEngine;
 
-namespace Common.Interfaces
+namespace Match3
 {
     public interface IGridTile : IGridSlotState, IDisposable
     {
         void SetActive(bool value);
-        void SetWorldPosition(Vector3 worldPosition);
+        void SetWorldPosition(int rowIndex, int columnIndex, Vector3 worldPosition);
     }
 }

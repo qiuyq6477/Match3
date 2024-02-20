@@ -1,10 +1,10 @@
 ﻿using System.Threading;
-using Common.Interfaces;
+using Match3;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
-using Match3.App.Interfaces;
+using Match3;
 
-namespace Common
+namespace Match3
 {
     public class AnimatedItemSwapper : IItemSwapper<IUnityGridSlot>
     {

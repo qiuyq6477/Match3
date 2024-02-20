@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.U2D;
 
-namespace Common.GridTiles
+namespace Match3
 {
     [RequireComponent(typeof(SpriteRenderer))]
     public abstract class SpriteGridTile : GridTile

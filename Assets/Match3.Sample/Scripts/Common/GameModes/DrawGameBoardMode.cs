@@ -1,28 +1,24 @@
 using System;
-using Common.Interfaces;
-using Common.Models;
-using Match3.Core.Structs;
-using Match3.Infrastructure.Interfaces;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Common.GameModes
+namespace Match3
 {
     public class DrawGameBoardMode : IGameMode, IDeactivatable
     {
-        private readonly IInputSystem _inputSystem;
-        private readonly IGameUiCanvas _gameUiCanvas;
-        private readonly IUnityGameBoardRenderer _gameBoardRenderer;
+        private readonly CanvasInputSystem _inputSystem;
+        private readonly GameUiCanvas _gameUiCanvas;
+        private readonly UnityGameBoardRenderer _gameBoardRenderer;
 
         private bool _isDrawMode;
         private bool _isInitialized;
         private GridPosition _previousSlotPosition;
 
-        public DrawGameBoardMode(IAppContext appContext)
+        public DrawGameBoardMode(AppContext appContext)
         {
-            _inputSystem = appContext.Resolve<IInputSystem>();
-            _gameUiCanvas = appContext.Resolve<IGameUiCanvas>();
-            _gameBoardRenderer = appContext.Resolve<IUnityGameBoardRenderer>();
+            _inputSystem = appContext.Resolve<CanvasInputSystem>();
+            _gameUiCanvas = appContext.Resolve<GameUiCanvas>();
+            _gameBoardRenderer = appContext.Resolve<UnityGameBoardRenderer>();
         }
 
         public event EventHandler Finished;

@@ -1,6 +1,5 @@
-using Match3.Core.Interfaces;
 
-namespace Common.Interfaces
+namespace Match3
 {
     public interface IUnityGridSlot : IGridSlot
     {

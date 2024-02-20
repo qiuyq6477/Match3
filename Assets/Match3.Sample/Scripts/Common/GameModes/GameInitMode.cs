@@ -1,28 +1,24 @@
 using System;
-using Common.Interfaces;
-using Common.Models;
-using Match3.App.Interfaces;
-using Match3.Infrastructure.Interfaces;
 using UnityEngine;
 
-namespace Common.GameModes
+namespace Match3
 {
     public class GameInitMode : IGameMode, IDisposable
     {
         private readonly UnityGame _unityGame;
-        private readonly IAppContext _appContext;
+        private readonly AppContext _appContext;
         private readonly IconsSetModel[] _iconSets;
-        private readonly IGameUiCanvas _gameUiCanvas;
+        private readonly GameUiCanvas _gameUiCanvas;
         private readonly IUnityItemGenerator _itemGenerator;
 
         private bool _isInitialized;
 
-        public GameInitMode(IAppContext appContext)
+        public GameInitMode(AppContext appContext)
         {
             _appContext = appContext;
             _unityGame = appContext.Resolve<UnityGame>();
             _iconSets = appContext.Resolve<IconsSetModel[]>();
-            _gameUiCanvas = appContext.Resolve<IGameUiCanvas>();
+            _gameUiCanvas = appContext.Resolve<GameUiCanvas>();
             _itemGenerator = appContext.Resolve<IUnityItemGenerator>();
         }
 

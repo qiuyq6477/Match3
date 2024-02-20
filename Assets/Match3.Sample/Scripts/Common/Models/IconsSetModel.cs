@@ -1,9 +1,9 @@
 using System;
-using Common.Extensions;
+using Match3;
 using UnityEngine;
 using UnityEngine.U2D;
 
-namespace Common.Models
+namespace Match3
 {
     [Serializable]
     public class IconsSetModel

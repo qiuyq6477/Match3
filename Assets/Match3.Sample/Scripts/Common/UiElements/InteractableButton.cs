@@ -2,7 +2,7 @@
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace Common.UiElements
+namespace Match3
 {
     public class InteractableButton : MonoBehaviour
     {

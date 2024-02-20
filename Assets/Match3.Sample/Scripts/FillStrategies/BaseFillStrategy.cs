@@ -1,24 +1,18 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using Common.Interfaces;
-using FillStrategies.Jobs;
-using Match3.App;
-using Match3.App.Interfaces;
-using Match3.Core.Structs;
-using Match3.Infrastructure.Interfaces;
 using UnityEngine;
 
-namespace FillStrategies
+namespace Match3
 {
     public abstract class BaseFillStrategy : IBoardFillStrategy<IUnityGridSlot>
     {
         private readonly IItemsPool<IUnityItem> _itemsPool;
-        private readonly IUnityGameBoardRenderer _gameBoardRenderer;
+        private readonly UnityGameBoardRenderer _gameBoardRenderer;
 
-        protected BaseFillStrategy(IAppContext appContext)
+        protected BaseFillStrategy(AppContext appContext)
         {
             _itemsPool = appContext.Resolve<IItemsPool<IUnityItem>>();
-            _gameBoardRenderer = appContext.Resolve<IUnityGameBoardRenderer>();
+            _gameBoardRenderer = appContext.Resolve<UnityGameBoardRenderer>();
         }
 
         public abstract string Name { get; }

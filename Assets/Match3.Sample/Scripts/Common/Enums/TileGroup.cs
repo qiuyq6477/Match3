@@ -1,4 +1,4 @@
-namespace Common.Enums
+namespace Match3
 {
     public enum TileGroup
     {

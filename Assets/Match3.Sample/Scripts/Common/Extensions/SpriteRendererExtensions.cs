@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Common.Extensions
+namespace Match3
 {
     public static class SpriteRendererExtensions
     {

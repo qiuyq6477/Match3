@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
-using Common.Interfaces;
-using FillStrategies.Jobs;
-using Match3.App;
-using Match3.App.Interfaces;
-using Match3.Infrastructure.Extensions;
+using Match3;
+using Match3;
+using Match3;
+using Match3;
+using Match3;
 
-namespace FillStrategies
+namespace Match3
 {
     public class SimpleFillStrategy : BaseFillStrategy
     {
-        public SimpleFillStrategy(IAppContext appContext) : base(appContext)
+        public SimpleFillStrategy(AppContext appContext) : base(appContext)
         {
         }
 

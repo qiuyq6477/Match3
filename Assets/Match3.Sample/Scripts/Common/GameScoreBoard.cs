@@ -1,10 +1,7 @@
 using System.Text;
-using Common.Interfaces;
-using Match3.App;
-using Match3.App.Interfaces;
 using UnityEngine;
 
-namespace Common
+namespace Match3
 {
     public class GameScoreBoard : ISolvedSequencesConsumer<IUnityGridSlot>
     {

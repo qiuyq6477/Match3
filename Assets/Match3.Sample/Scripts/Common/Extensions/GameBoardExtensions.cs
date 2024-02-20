@@ -1,8 +1,8 @@
-using Common.Interfaces;
-using Match3.App.Interfaces;
-using Match3.Core.Structs;
+using Match3;
+using Match3;
+using Match3;
 
-namespace Common.Extensions
+namespace Match3
 {
     public static class GameBoardExtensions
     {

@@ -1,7 +1,8 @@
-using Common.Interfaces;
+using System;
+using Match3;
 using UnityEngine;
 
-namespace Common.GridTiles
+namespace Match3
 {
     public abstract class GridTile : MonoBehaviour, IGridTile
     {
@@ -11,13 +12,18 @@ namespace Common.GridTiles
         public abstract bool IsLocked { get; }
         public abstract bool CanContainItem { get; }
 
+        public int RowIndex;
+        public int ColumnIndex;
+        
         public void SetActive(bool value)
         {
             gameObject.SetActive(value);
         }
 
-        public void SetWorldPosition(Vector3 worldPosition)
+        public void SetWorldPosition(int rowIndex, int columnIndex, Vector3 worldPosition)
         {
+            RowIndex = rowIndex;
+            ColumnIndex = columnIndex;
             transform.position = worldPosition;
         }
 
@@ -32,6 +38,11 @@ namespace Common.GridTiles
             {
                 Destroy(gameObject);
             }
+        }
+
+        private void OnGUI()
+        {
+            GUI.Label(new Rect(transform.position, new Vector2(40, 20)), RowIndex + "  " + ColumnIndex);
         }
     }
 }

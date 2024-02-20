@@ -1,17 +1,17 @@
 ﻿using System.Collections.Generic;
-using Common.Extensions;
-using Common.Interfaces;
-using FillStrategies.Jobs;
-using FillStrategies.Models;
-using Match3.App;
-using Match3.App.Interfaces;
-using Match3.Core.Structs;
+using Match3;
+using Match3;
+using Match3;
+using Match3;
+using Match3;
+using Match3;
+using Match3;
 
-namespace FillStrategies
+namespace Match3
 {
     public class FallDownFillStrategy : BaseFillStrategy
     {
-        public FallDownFillStrategy(IAppContext appContext) : base(appContext)
+        public FallDownFillStrategy(AppContext appContext) : base(appContext)
         {
         }
 

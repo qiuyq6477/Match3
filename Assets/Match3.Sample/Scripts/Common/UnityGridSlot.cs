@@ -1,10 +1,10 @@
 using System;
 using System.Runtime.CompilerServices;
-using Common.Interfaces;
-using Match3.Core.Interfaces;
-using Match3.Core.Structs;
+using Match3;
+using Match3;
+using Match3;
 
-namespace Common
+namespace Match3
 {
     public class UnityGridSlot : IUnityGridSlot
     {

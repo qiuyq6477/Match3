@@ -1,9 +1,9 @@
 ﻿using System.Runtime.CompilerServices;
 using DG.Tweening;
-using FillStrategies.Models;
-using Match3.App;
+using Match3;
+using Match3;
 
-namespace FillStrategies.Jobs
+namespace Match3
 {
     public abstract class MoveJob : Job
     {

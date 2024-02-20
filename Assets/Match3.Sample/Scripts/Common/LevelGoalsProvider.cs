@@ -1,9 +1,9 @@
-using Common.Interfaces;
-using Common.LevelGoals;
-using Match3.App;
-using Match3.App.Interfaces;
+using Match3;
+using Match3;
+using Match3;
+using Match3;
 
-namespace Common
+namespace Match3
 {
     public class LevelGoalsProvider : ILevelGoalsProvider<IUnityGridSlot>
     {
