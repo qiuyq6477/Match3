@@ -4,7 +4,7 @@ using Cysharp.Threading.Tasks;
 
 namespace Match3
 {
-    public class GamePlayMode : IGameMode, IDeactivatable
+    public class GamePlayMode : IGameMode
     {
         private readonly UnityGame _unityGame;
         private readonly GameUiCanvas _gameUiCanvas;

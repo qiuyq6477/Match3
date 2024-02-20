@@ -7,5 +7,7 @@ namespace Match3
         event EventHandler Finished;
 
         void Activate();
+        
+        void Deactivate();
     }
 }

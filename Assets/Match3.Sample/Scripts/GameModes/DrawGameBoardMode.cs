@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 namespace Match3
 {
-    public class DrawGameBoardMode : IGameMode, IDeactivatable
+    public class DrawGameBoardMode : IGameMode
     {
         private readonly CanvasInputSystem _inputSystem;
         private readonly GameUiCanvas _gameUiCanvas;

@@ -27,5 +27,9 @@ namespace Match3
 
             Finished?.Invoke(this, EventArgs.Empty);
         }
+
+        public void Deactivate()
+        {
+        }
     }
 }

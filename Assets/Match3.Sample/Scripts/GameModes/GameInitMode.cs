@@ -41,6 +41,10 @@ namespace Match3
             Finished?.Invoke(this, EventArgs.Empty);
         }
 
+        public void Deactivate()
+        {
+        }
+
         public void Dispose()
         {
             _unityGame.Dispose();
