@@ -1,6 +1,6 @@
 namespace Match3
 {
-    public enum TileGroup
+    public enum TileType
     {
         Unavailable = 0,
         Available = 1,

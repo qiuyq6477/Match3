@@ -2,7 +2,7 @@ namespace Match3
 {
     public interface IGridSlotState
     {
-        int GroupId { get; }
+        int TypeId { get; }
         bool IsLocked { get; }
         bool CanContainItem { get; }
     }

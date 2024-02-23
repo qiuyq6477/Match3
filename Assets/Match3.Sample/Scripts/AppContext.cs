@@ -54,16 +54,19 @@ public class AppContext : MonoBehaviour//, IAppContext
         _registeredTypes.Add(typeof(T1), instance);
         _registeredTypes.Add(typeof(T2), instance);
     }
-
+    
     private UnityGame GetUnityGame()
     {
         var gameConfig = new GameConfig<IGridSlot>
         {
-            GameBoardDataProvider = _gameBoardRenderer,
+            GameBoard = new GameBoard(),
             ItemSwapper = new AnimatedItemSwapper(),
             LevelGoalsProvider = new LevelGoalsProvider(),
-            GameBoardSolver = GetGameBoardSolver(),
-            SolvedSequencesConsumers = GetSolvedSequencesConsumers()
+            GameBoardSolver = new GameBoardSolver<IGridSlot>(GetSequenceDetectors(), GetSpecialItemDetectors()),
+            SolvedSequencesConsumers = new ISolvedSequencesConsumer<IGridSlot>[]
+            {
+                new GameScoreBoard()
+            }
         };
 
         return new UnityGame(_inputSystem, _gameBoardRenderer, gameConfig);
@@ -72,11 +75,6 @@ public class AppContext : MonoBehaviour//, IAppContext
     private ItemGenerator GetItemGenerator()
     {
         return new ItemGenerator(_itemPrefab, new GameObject("ItemsPool").transform);
-    }
-
-    private IGameBoardSolver<IGridSlot> GetGameBoardSolver()
-    {
-        return new GameBoardSolver<IGridSlot>(GetSequenceDetectors(), GetSpecialItemDetectors());
     }
 
     private ISequenceDetector<IGridSlot>[] GetSequenceDetectors()
@@ -96,15 +94,7 @@ public class AppContext : MonoBehaviour//, IAppContext
             new IceItemDetector()
         };
     }
-
-    private ISolvedSequencesConsumer<IGridSlot>[] GetSolvedSequencesConsumers()
-    {
-        return new ISolvedSequencesConsumer<IGridSlot>[]
-        {
-            new GameScoreBoard()
-        };
-    }
-
+    
     private IBoardFillStrategy<IGridSlot>[] GetBoardFillStrategies()
     {
         return new IBoardFillStrategy<IGridSlot>[]

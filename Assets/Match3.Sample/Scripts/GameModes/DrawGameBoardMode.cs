@@ -9,7 +9,8 @@ namespace Match3
         private readonly CanvasInputSystem _inputSystem;
         private readonly GameUiCanvas _gameUiCanvas;
         private readonly UnityGameBoardRenderer _gameBoardRenderer;
-
+        private readonly UnityGame _unityGame;
+        
         private bool _isDrawMode;
         private bool _isInitialized;
         private GridPosition _previousSlotPosition;
@@ -19,6 +20,7 @@ namespace Match3
             _inputSystem = appContext.Resolve<CanvasInputSystem>();
             _gameUiCanvas = appContext.Resolve<GameUiCanvas>();
             _gameBoardRenderer = appContext.Resolve<UnityGameBoardRenderer>();
+            _unityGame = appContext.Resolve<UnityGame>();
         }
 
         public event EventHandler Finished;
@@ -28,7 +30,9 @@ namespace Match3
             if (_isInitialized == false)
             {
                 _isInitialized = true;
-                _gameBoardRenderer.CreateGridTiles(null);
+                var gridTilePool = new GridTilePool(_gameBoardRenderer.GridTilesModel, new GameObject("GridTilePool").transform);
+                _unityGame.GameBoard.SetGridTilePool(gridTilePool);
+                _unityGame.GameBoard.InitGridTiles(new int[_gameBoardRenderer.RowCount,_gameBoardRenderer.ColumnCount]);
             }
 
             _inputSystem.PointerDown += OnPointerDown;
@@ -108,7 +112,7 @@ namespace Match3
 
         private bool IsPointerOnGrid(Vector3 worldPosition, out GridPosition gridPosition)
         {
-            return _gameBoardRenderer.IsPointerOnGrid(worldPosition, out gridPosition);
+            return _unityGame.GameBoard.IsPointerOnGrid(worldPosition, out gridPosition);
         }
 
         private bool IsSameSlot(GridPosition slotPosition)
@@ -118,21 +122,21 @@ namespace Match3
 
         private void InvertGridTileState(GridPosition gridPosition)
         {
-            if (_gameBoardRenderer.IsTileActive(gridPosition))
+            if (_unityGame.GameBoard.IsTileAvailable(gridPosition))
             {
-                _gameBoardRenderer.DeactivateTile(gridPosition);
+                _unityGame.GameBoard.DeactivateTile(gridPosition);
             }
             else
             {
-                _gameBoardRenderer.ActivateTile(gridPosition);
+                _unityGame.GameBoard.ActivateTile(gridPosition);
             }
         }
 
         private void SetNextGridTileGroup(GridPosition gridPosition)
         {
-            if (_gameBoardRenderer.IsTileActive(gridPosition))
+            if (_unityGame.GameBoard.IsTileAvailable(gridPosition))
             {
-                _gameBoardRenderer.SetNextGridTileGroup(gridPosition);
+                _unityGame.GameBoard.SetNextGridTileType(gridPosition);
             }
         }
     }

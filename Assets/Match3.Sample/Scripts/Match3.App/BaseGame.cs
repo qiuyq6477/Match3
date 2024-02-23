@@ -12,10 +12,9 @@ namespace Match3
 {
     public abstract class BaseGame<TGridSlot> : IDisposable where TGridSlot : IGridSlot
     {
-        private readonly GameBoard<TGridSlot> _gameBoard;
+        private readonly IGameBoard<TGridSlot> _gameBoard;
         private readonly IGameBoardSolver<TGridSlot> _gameBoardSolver;
         private readonly ILevelGoalsProvider<TGridSlot> _levelGoalsProvider;
-        private readonly IGameBoardDataProvider<TGridSlot> _gameBoardDataProvider;
         private readonly ISolvedSequencesConsumer<TGridSlot>[] _solvedSequencesConsumers;
         
         private readonly JobsExecutor _jobsExecutor;
@@ -33,17 +32,16 @@ namespace Match3
         
         protected BaseGame(GameConfig<TGridSlot> config)
         {
-            _gameBoard = new GameBoard<TGridSlot>();
+            _gameBoard = config.GameBoard;
 
             _gameBoardSolver = config.GameBoardSolver;
             _levelGoalsProvider = config.LevelGoalsProvider;
-            _gameBoardDataProvider = config.GameBoardDataProvider;
             _solvedSequencesConsumers = config.SolvedSequencesConsumers;
             _itemSwapper = config.ItemSwapper;
             _jobsExecutor = new JobsExecutor();
         }
 
-        protected IGameBoard<TGridSlot> GameBoard => _gameBoard;
+        public IGameBoard<TGridSlot> GameBoard => _gameBoard;
 
         protected bool IsSwapItemsCompleted
         {
@@ -61,7 +59,6 @@ namespace Match3
             }
 
             _sprites = sprites;
-            _gameBoard.SetGridSlots(_gameBoardDataProvider.GetGameBoardSlots(level));
             _levelGoals = _levelGoalsProvider.GetLevelGoals(level, _gameBoard);
         }
 
@@ -122,6 +119,7 @@ namespace Match3
         public void ResetGameBoard()
         {
             _achievedGoals = 0;
+            _gameBoard.ResetGridTiles();
             _gameBoard.ResetState();
         }
 

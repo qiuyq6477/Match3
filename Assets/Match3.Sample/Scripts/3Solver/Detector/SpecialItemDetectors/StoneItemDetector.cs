@@ -34,7 +34,7 @@ namespace Match3
                 }
 
                 var lookupGridSlot = gameBoard[lookupPosition];
-                if (lookupGridSlot.State.GroupId == (int) TileGroup.Stone)
+                if (lookupGridSlot.State.TypeId == (int) TileType.Stone)
                 {
                     yield return lookupGridSlot;
                 }

@@ -4,9 +4,9 @@ namespace Match3
     {
         private bool _isLocked = true;
         private bool _canContainItem;
-        private int _group = (int) TileGroup.Stone;
+        private int _group = (int) TileType.Stone;
 
-        public override int GroupId => _group;
+        public override int TypeId => _group;
         public override bool IsLocked => _isLocked;
         public override bool CanContainItem => _canContainItem;
 
@@ -14,14 +14,14 @@ namespace Match3
         {
             _isLocked = false;
             _canContainItem = true;
-            _group = (int) TileGroup.Available;
+            _group = (int) TileType.Available;
         }
 
         protected override void OnReset()
         {
             _isLocked = true;
             _canContainItem = false;
-            _group = (int) TileGroup.Stone;
+            _group = (int) TileType.Stone;
         }
     }
 }

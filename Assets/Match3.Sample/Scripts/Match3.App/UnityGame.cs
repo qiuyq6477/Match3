@@ -79,7 +79,7 @@ namespace Match3
 
         private bool IsPointerOnBoard(Vector3 pointerWorldPosition, out GridPosition slotDownPosition)
         {
-            return _gameBoardRenderer.IsPointerOnBoard(pointerWorldPosition, out slotDownPosition);
+            return GameBoard.IsPointerOnBoard(pointerWorldPosition, out slotDownPosition);
         }
 
         private bool IsMovableSlot(GridPosition gridPosition)

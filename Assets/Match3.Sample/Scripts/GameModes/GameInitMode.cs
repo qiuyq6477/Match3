@@ -45,17 +45,16 @@ namespace Match3
 
         private void Init(int level)
         {
-            var gameBoardData = _appContext.Resolve<IGameBoardDataProvider<IGridSlot>>().GetGameBoardSlots(level);
             var itemGenerator = _appContext.Resolve<IItemsPool<IItem>>();
-            var rowCount = gameBoardData.GetLength(0);
-            var columnCount = gameBoardData.GetLength(1);
+            var rowCount = _unityGame.GameBoard.RowCount;
+            var columnCount = _unityGame.GameBoard.ColumnCount;
             var itemsPoolCapacity = rowCount * columnCount + Mathf.Max(rowCount, columnCount) * 2;
             itemGenerator.Init(itemsPoolCapacity);
             _isInitialized = true;
         }
 
         private void SetLevel(int level)
-        {
+        {            
             _unityGame.InitGameLevel(level, _iconSets[_gameUiCanvas.SelectedIconsSetIndex].Sprites);
         }
     }

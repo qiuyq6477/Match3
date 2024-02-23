@@ -7,7 +7,7 @@ namespace Match3
     {
         private bool _isDestroyed;
 
-        public abstract int GroupId { get; }
+        public abstract int TypeId { get; }
         public abstract bool IsLocked { get; }
         public abstract bool CanContainItem { get; }
 

@@ -1,16 +1,17 @@
 using System;
 
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Match3
 {
     [Serializable]
     public class TileModel
     {
-        [SerializeField] private TileGroup _group;
+        [FormerlySerializedAs("_group")] [SerializeField] private TileType type;
         [SerializeField] private GameObject _prefab;
 
-        public TileGroup Group => _group;
+        public TileType Type => type;
         public GameObject Prefab => _prefab;
     }
 }

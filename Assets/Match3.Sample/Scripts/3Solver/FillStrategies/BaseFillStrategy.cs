@@ -52,7 +52,7 @@ namespace Match3
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected Vector3 GetWorldPosition(GridPosition gridPosition)
         {
-            return _gameBoardRenderer.GetWorldPosition(gridPosition);
+            return _baseGame.GameBoard.GetWorldPosition(gridPosition);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

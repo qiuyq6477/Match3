@@ -10,7 +10,7 @@ namespace Match3
         public IEnumerable<IGridSlot> GetSpecialItemGridSlots(IGameBoard<IGridSlot> gameBoard,
             IGridSlot gridSlot)
         {
-            if (gridSlot.State.GroupId == (int) TileGroup.Ice)
+            if (gridSlot.State.TypeId == (int) TileType.Ice)
             {
                 yield return gridSlot;
             }

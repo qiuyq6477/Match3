@@ -22,7 +22,6 @@ namespace Match3
         public void Activate()
         {
             _itemsPool.ReturnAllItems(_unityGame.GetGridSlots());
-            _gameBoardRenderer.ResetGridTiles();
             _unityGame.ResetGameBoard();
 
             Finished?.Invoke(this, EventArgs.Empty);
