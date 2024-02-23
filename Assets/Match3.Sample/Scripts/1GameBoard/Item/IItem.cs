@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Match3
 {
-    public interface IUnityItem : IDisposable
+    public interface IItem : IDisposable
     {
         int ContentId { get; }
 

@@ -22,17 +22,17 @@ public class AppContext : MonoBehaviour//, IAppContext
         RegisterInstance(_inputSystem);
         RegisterInstance(_iconSets);
         RegisterInstance(_gameUiCanvas);
-        RegisterInstance<UnityGameBoardRenderer, IGameBoardDataProvider<IUnityGridSlot>>(_gameBoardRenderer);
+        RegisterInstance<UnityGameBoardRenderer, IGameBoardDataProvider<IGridSlot>>(_gameBoardRenderer);
 
         RegisterInstance(GetUnityGame());
-        RegisterInstance<IUnityItemGenerator, IItemsPool<IUnityItem>>(GetItemGenerator());
-        RegisterInstance<IBoardFillStrategy<IUnityGridSlot>[]>(GetBoardFillStrategies());
+        RegisterInstance<IItemsPool<IItem>>(GetItemGenerator());
+        RegisterInstance<IBoardFillStrategy<IGridSlot>[]>(GetBoardFillStrategies());
     }
 
     public void Destruct()
     {
         var unityGame = Resolve<UnityGame>();
-        var itemGenerator = Resolve<IUnityItemGenerator>();
+        var itemGenerator = Resolve<IItemsPool<IItem>>();
         unityGame.Dispose();
         itemGenerator.Dispose();
     }
@@ -57,7 +57,7 @@ public class AppContext : MonoBehaviour//, IAppContext
 
     private UnityGame GetUnityGame()
     {
-        var gameConfig = new GameConfig<IUnityGridSlot>
+        var gameConfig = new GameConfig<IGridSlot>
         {
             GameBoardDataProvider = _gameBoardRenderer,
             ItemSwapper = new AnimatedItemSwapper(),
@@ -69,45 +69,45 @@ public class AppContext : MonoBehaviour//, IAppContext
         return new UnityGame(_inputSystem, _gameBoardRenderer, gameConfig);
     }
 
-    private UnityItemGenerator GetItemGenerator()
+    private ItemGenerator GetItemGenerator()
     {
-        return new UnityItemGenerator(_itemPrefab, new GameObject("ItemsPool").transform);
+        return new ItemGenerator(_itemPrefab, new GameObject("ItemsPool").transform);
     }
 
-    private IGameBoardSolver<IUnityGridSlot> GetGameBoardSolver()
+    private IGameBoardSolver<IGridSlot> GetGameBoardSolver()
     {
-        return new GameBoardSolver<IUnityGridSlot>(GetSequenceDetectors(), GetSpecialItemDetectors());
+        return new GameBoardSolver<IGridSlot>(GetSequenceDetectors(), GetSpecialItemDetectors());
     }
 
-    private ISequenceDetector<IUnityGridSlot>[] GetSequenceDetectors()
+    private ISequenceDetector<IGridSlot>[] GetSequenceDetectors()
     {
-        return new ISequenceDetector<IUnityGridSlot>[]
+        return new ISequenceDetector<IGridSlot>[]
         {
-            new VerticalLineDetector<IUnityGridSlot>(),
-            new HorizontalLineDetector<IUnityGridSlot>()
+            new VerticalLineDetector<IGridSlot>(),
+            new HorizontalLineDetector<IGridSlot>()
         };
     }
 
-    private ISpecialItemDetector<IUnityGridSlot>[] GetSpecialItemDetectors()
+    private ISpecialItemDetector<IGridSlot>[] GetSpecialItemDetectors()
     {
-        return new ISpecialItemDetector<IUnityGridSlot>[]
+        return new ISpecialItemDetector<IGridSlot>[]
         {
             new StoneItemDetector(),
             new IceItemDetector()
         };
     }
 
-    private ISolvedSequencesConsumer<IUnityGridSlot>[] GetSolvedSequencesConsumers()
+    private ISolvedSequencesConsumer<IGridSlot>[] GetSolvedSequencesConsumers()
     {
-        return new ISolvedSequencesConsumer<IUnityGridSlot>[]
+        return new ISolvedSequencesConsumer<IGridSlot>[]
         {
             new GameScoreBoard()
         };
     }
 
-    private IBoardFillStrategy<IUnityGridSlot>[] GetBoardFillStrategies()
+    private IBoardFillStrategy<IGridSlot>[] GetBoardFillStrategies()
     {
-        return new IBoardFillStrategy<IUnityGridSlot>[]
+        return new IBoardFillStrategy<IGridSlot>[]
         {
             new SimpleFillStrategy(this),
             new FallDownFillStrategy(this),

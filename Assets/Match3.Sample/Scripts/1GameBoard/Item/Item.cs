@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Match3
 {
-    public class UnityItem : MonoBehaviour, IUnityItem
+    public class Item : MonoBehaviour, IItem
     {
         [SerializeField] private SpriteRenderer _spriteRenderer;
 

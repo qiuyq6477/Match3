@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Match3
 {
-    public class UnityGame : Match3Game<IUnityGridSlot>
+    public class UnityGame : BaseGame<IGridSlot>
     {
         private readonly CanvasInputSystem _inputSystem;
         private readonly UnityGameBoardRenderer _gameBoardRenderer;
@@ -17,7 +17,7 @@ namespace Match3
         private GridPosition _slotDownPosition;
 
         public UnityGame(CanvasInputSystem inputSystem, UnityGameBoardRenderer gameBoardRenderer,
-            GameConfig<IUnityGridSlot> config) : base(config)
+            GameConfig<IGridSlot> config) : base(config)
         {
             _inputSystem = inputSystem;
             _gameBoardRenderer = gameBoardRenderer;
@@ -35,7 +35,7 @@ namespace Match3
             _inputSystem.PointerDrag -= OnPointerDrag;
         }
 
-        public IEnumerable<IUnityGridSlot> GetGridSlots()
+        public IEnumerable<IGridSlot> GetGridSlots()
         {
             for (var rowIndex = 0; rowIndex < GameBoard.RowCount; rowIndex++)
             {

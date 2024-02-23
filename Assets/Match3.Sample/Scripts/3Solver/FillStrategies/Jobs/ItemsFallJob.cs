@@ -44,7 +44,7 @@ namespace Match3
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private Tween CreateItemFadeInTween(IUnityItem item)
+        private Tween CreateItemFadeInTween(IItem item)
         {
             item.SpriteRenderer.SetAlpha(0);
             item.SetScale(1);

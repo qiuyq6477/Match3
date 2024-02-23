@@ -1,25 +1,29 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using Random = System.Random;
 
 namespace Match3
 {
-    public abstract class BaseFillStrategy : IBoardFillStrategy<IUnityGridSlot>
+    public abstract class BaseFillStrategy : IBoardFillStrategy<IGridSlot>
     {
-        private readonly IItemsPool<IUnityItem> _itemsPool;
+        private readonly Random _random;
+        private readonly IItemsPool<IItem> _itemsPool;
         private readonly UnityGameBoardRenderer _gameBoardRenderer;
-
+        private readonly BaseGame<IGridSlot> _baseGame;
         protected BaseFillStrategy(AppContext appContext)
         {
-            _itemsPool = appContext.Resolve<IItemsPool<IUnityItem>>();
+            _random = new Random();
+            _itemsPool = appContext.Resolve<IItemsPool<IItem>>();
             _gameBoardRenderer = appContext.Resolve<UnityGameBoardRenderer>();
+            _baseGame = appContext.Resolve<UnityGame>();
         }
 
         public abstract string Name { get; }
 
-        public virtual IEnumerable<IJob> GetFillJobs(IGameBoard<IUnityGridSlot> gameBoard)
+        public virtual IEnumerable<IJob> GetFillJobs(IGameBoard<IGridSlot> gameBoard)
         {
-            var itemsToShow = new List<IUnityItem>();
+            var itemsToShow = new List<IItem>();
 
             for (var rowIndex = 0; rowIndex < gameBoard.RowCount; rowIndex++)
             {
@@ -42,8 +46,8 @@ namespace Match3
             return new[] { new ItemsShowJob(itemsToShow) };
         }
 
-        public abstract IEnumerable<IJob> GetSolveJobs(IGameBoard<IUnityGridSlot> gameBoard,
-            SolvedData<IUnityGridSlot> solvedData);
+        public abstract IEnumerable<IJob> GetSolveJobs(IGameBoard<IGridSlot> gameBoard,
+            SolvedData<IGridSlot> solvedData);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected Vector3 GetWorldPosition(GridPosition gridPosition)
@@ -52,13 +56,17 @@ namespace Match3
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        protected IUnityItem GetItemFromPool()
+        protected IItem GetItemFromPool()
         {
-            return _itemsPool.GetItem();
+            var item = _itemsPool.GetItem();
+            var sprites = _baseGame.GetSprite();
+            var index = _random.Next(0, sprites.Length);
+            item.SetSprite(index, sprites[index]);
+            return item;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        protected void ReturnItemToPool(IUnityItem item)
+        protected void ReturnItemToPool(IItem item)
         {
             _itemsPool.ReturnItem(item);
         }

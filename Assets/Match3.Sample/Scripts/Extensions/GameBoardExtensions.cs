@@ -6,7 +6,7 @@ namespace Match3
 {
     public static class GameBoardExtensions
     {
-        public static bool CanMoveDown(this IGameBoard<IUnityGridSlot> gameBoard, IUnityGridSlot gridSlot,
+        public static bool CanMoveDown(this IGameBoard<IGridSlot> gameBoard, IGridSlot gridSlot,
             out GridPosition gridPosition)
         {
             var bottomGridSlot = gameBoard.GetSideGridSlot(gridSlot, GridPosition.Down);
@@ -20,7 +20,7 @@ namespace Match3
             return false;
         }
 
-        public static IUnityGridSlot GetSideGridSlot(this IGameBoard<IUnityGridSlot> gameBoard, IUnityGridSlot gridSlot,
+        public static IGridSlot GetSideGridSlot(this IGameBoard<IGridSlot> gameBoard, IGridSlot gridSlot,
             GridPosition direction)
         {
             var sideGridSlotPosition = gridSlot.GridPosition + direction;

@@ -6,7 +6,7 @@ namespace Match3
 {
     public static class ItemsPoolExtensions
     {
-        public static void ReturnAllItems(this IItemsPool<IUnityItem> itemsPool, IEnumerable<IUnityGridSlot> gridSlots)
+        public static void ReturnAllItems(this IItemsPool<IItem> itemsPool, IEnumerable<IGridSlot> gridSlots)
         {
             foreach (var gridSlot in gridSlots)
             {

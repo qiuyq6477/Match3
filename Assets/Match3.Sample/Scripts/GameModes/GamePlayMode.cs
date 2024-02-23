@@ -8,13 +8,13 @@ namespace Match3
     {
         private readonly UnityGame _unityGame;
         private readonly GameUiCanvas _gameUiCanvas;
-        private readonly IBoardFillStrategy<IUnityGridSlot>[] _boardFillStrategies;
+        private readonly IBoardFillStrategy<IGridSlot>[] _boardFillStrategies;
 
         public GamePlayMode(AppContext appContext)
         {
             _unityGame = appContext.Resolve<UnityGame>();
             _gameUiCanvas = appContext.Resolve<GameUiCanvas>();
-            _boardFillStrategies = appContext.Resolve<IBoardFillStrategy<IUnityGridSlot>[]>();
+            _boardFillStrategies = appContext.Resolve<IBoardFillStrategy<IGridSlot>[]>();
         }
 
         public event EventHandler Finished
@@ -43,7 +43,7 @@ namespace Match3
             _gameUiCanvas.ShowMessage("Game finished.");
         }
 
-        private void OnLevelGoalAchieved(object sender, LevelGoal<IUnityGridSlot> levelGoal)
+        private void OnLevelGoalAchieved(object sender, LevelGoal<IGridSlot> levelGoal)
         {
             _gameUiCanvas.RegisterAchievedGoal(levelGoal);
         }
@@ -53,12 +53,12 @@ namespace Match3
             _unityGame.SetGameBoardFillStrategy(GetFillStrategy(index));
         }
 
-        private IBoardFillStrategy<IUnityGridSlot> GetSelectedFillStrategy()
+        private IBoardFillStrategy<IGridSlot> GetSelectedFillStrategy()
         {
             return GetFillStrategy(_gameUiCanvas.SelectedFillStrategyIndex);
         }
 
-        private IBoardFillStrategy<IUnityGridSlot> GetFillStrategy(int index)
+        private IBoardFillStrategy<IGridSlot> GetFillStrategy(int index)
         {
             return _boardFillStrategies[index];
         }

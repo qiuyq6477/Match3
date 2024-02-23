@@ -5,11 +5,11 @@ using Match3;
 
 namespace Match3
 {
-    public class LevelGoalsProvider : ILevelGoalsProvider<IUnityGridSlot>
+    public class LevelGoalsProvider : ILevelGoalsProvider<IGridSlot>
     {
-        public LevelGoal<IUnityGridSlot>[] GetLevelGoals(int level, IGameBoard<IUnityGridSlot> gameBoard)
+        public LevelGoal<IGridSlot>[] GetLevelGoals(int level, IGameBoard<IGridSlot> gameBoard)
         {
-            return new LevelGoal<IUnityGridSlot>[] { new CollectRowMaxItems(gameBoard) };
+            return new LevelGoal<IGridSlot>[] { new CollectRowMaxItems(gameBoard) };
         }
     }
 }

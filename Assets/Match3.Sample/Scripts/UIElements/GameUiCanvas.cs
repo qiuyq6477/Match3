@@ -25,7 +25,7 @@ namespace Match3
         private void Start()
         {
             _iconsSetDropdown.AddItems(_appContext.Resolve<IconsSetModel[]>().Select(iconsSet => iconsSet.Name));
-            _fillStrategyDropdown.AddItems(_appContext.Resolve<IBoardFillStrategy<IUnityGridSlot>[]>()
+            _fillStrategyDropdown.AddItems(_appContext.Resolve<IBoardFillStrategy<IGridSlot>[]>()
                 .Select(strategy => strategy.Name));
         }
 
@@ -46,7 +46,7 @@ namespace Match3
             Debug.Log(message);
         }
 
-        public void RegisterAchievedGoal(LevelGoal<IUnityGridSlot> achievedGoal)
+        public void RegisterAchievedGoal(LevelGoal<IGridSlot> achievedGoal)
         {
             ShowMessage($"The goal {achievedGoal.GetType().Name} achieved.");
         }

@@ -39,10 +39,5 @@ namespace Match3
                 Destroy(gameObject);
             }
         }
-
-        private void OnGUI()
-        {
-            GUI.Label(new Rect(transform.position, new Vector2(40, 20)), RowIndex + "  " + ColumnIndex);
-        }
     }
 }

@@ -7,13 +7,13 @@ namespace Match3
     public class GameResetMode : IGameMode
     {
         private readonly UnityGame _unityGame;
-        private readonly IItemsPool<IUnityItem> _itemsPool;
+        private readonly IItemsPool<IItem> _itemsPool;
         private readonly UnityGameBoardRenderer _gameBoardRenderer;
 
         public GameResetMode(AppContext appContext)
         {
             _unityGame = appContext.Resolve<UnityGame>();
-            _itemsPool = appContext.Resolve<IItemsPool<IUnityItem>>();
+            _itemsPool = appContext.Resolve<IItemsPool<IItem>>();
             _gameBoardRenderer = appContext.Resolve<UnityGameBoardRenderer>();
         }
 

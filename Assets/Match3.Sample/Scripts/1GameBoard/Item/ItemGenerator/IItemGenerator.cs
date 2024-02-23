@@ -1,9 +1,10 @@
-﻿using System;
-
-namespace Match3
-{
-    public interface IItemGenerator : IDisposable
-    {
-        void CreateItems(int capacity);
-    }
-}
+﻿// using System;
+//
+// namespace Match3
+// {
+//     public interface IItemGenerator<TItem> : IDisposable
+//     {
+//         // public TItem GetItem();
+//
+//     }
+// }

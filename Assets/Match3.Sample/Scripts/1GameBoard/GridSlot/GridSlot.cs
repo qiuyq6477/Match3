@@ -6,9 +6,9 @@ using Match3;
 
 namespace Match3
 {
-    public class UnityGridSlot : IUnityGridSlot
+    public class GridSlot : IGridSlot
     {
-        public UnityGridSlot(IGridSlotState state, GridPosition gridPosition)
+        public GridSlot(IGridSlotState state, GridPosition gridPosition)
         {
             State = state;
             GridPosition = gridPosition;
@@ -22,7 +22,7 @@ namespace Match3
         public bool CanSetItem => State.CanContainItem && HasItem == false;
         public bool NotAvailable => State.CanContainItem == false || State.IsLocked;
 
-        public IUnityItem Item { get; private set; }
+        public IItem Item { get; private set; }
         public IGridSlotState State { get; private set; }
         public GridPosition GridPosition { get; }
 
@@ -31,7 +31,7 @@ namespace Match3
             State = state;
         }
 
-        public void SetItem(IUnityItem item)
+        public void SetItem(IItem item)
         {
             EnsureItemIsNotNull(item);
 
@@ -49,7 +49,7 @@ namespace Match3
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void EnsureItemIsNotNull(IUnityItem item)
+        private void EnsureItemIsNotNull(IItem item)
         {
             if (item == null)
             {

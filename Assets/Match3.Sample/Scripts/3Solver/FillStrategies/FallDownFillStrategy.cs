@@ -17,12 +17,12 @@ namespace Match3
 
         public override string Name => "Fall Down Fill Strategy";
 
-        public override IEnumerable<IJob> GetSolveJobs(IGameBoard<IUnityGridSlot> gameBoard,
-            SolvedData<IUnityGridSlot> solvedData)
+        public override IEnumerable<IJob> GetSolveJobs(IGameBoard<IGridSlot> gameBoard,
+            SolvedData<IGridSlot> solvedData)
         {
             var jobs = new List<IJob>();
-            var itemsToHide = new List<IUnityItem>();
-            var solvedGridSlots = new HashSet<IUnityGridSlot>();
+            var itemsToHide = new List<IItem>();
+            var solvedGridSlots = new HashSet<IGridSlot>();
 
             foreach (var solvedGridSlot in solvedData.GetSolvedGridSlots())
             {
@@ -64,7 +64,7 @@ namespace Match3
             return jobs;
         }
 
-        private List<ItemMoveData> GetItemsMoveData(IGameBoard<IUnityGridSlot> gameBoard, int columnIndex)
+        private List<ItemMoveData> GetItemsMoveData(IGameBoard<IGridSlot> gameBoard, int columnIndex)
         {
             var itemsDropData = new List<ItemMoveData>();
 
@@ -92,7 +92,7 @@ namespace Match3
             return itemsDropData;
         }
 
-        private IEnumerable<IJob> GetFillJobs(IGameBoard<IUnityGridSlot> gameBoard, int delayMultiplier)
+        private IEnumerable<IJob> GetFillJobs(IGameBoard<IGridSlot> gameBoard, int delayMultiplier)
         {
             var jobs = new List<IJob>();
 
@@ -128,7 +128,7 @@ namespace Match3
             return jobs;
         }
 
-        private GridPosition GetItemGeneratorPosition(IGameBoard<IUnityGridSlot> gameBoard, int rowIndex, int columnIndex)
+        private GridPosition GetItemGeneratorPosition(IGameBoard<IGridSlot> gameBoard, int rowIndex, int columnIndex)
         {
             while (rowIndex >= 0)
             {
@@ -144,7 +144,7 @@ namespace Match3
             return new GridPosition(-1, columnIndex);
         }
 
-        private bool CanDropDown(IGameBoard<IUnityGridSlot> gameBoard, IUnityGridSlot gridSlot,
+        private bool CanDropDown(IGameBoard<IGridSlot> gameBoard, IGridSlot gridSlot,
             out GridPosition destinationGridPosition)
         {
             var destinationGridSlot = gridSlot;

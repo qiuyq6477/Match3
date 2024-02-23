@@ -6,11 +6,11 @@ using Match3;
 
 namespace Match3
 {
-    public class AnimatedItemSwapper : IItemSwapper<IUnityGridSlot>
+    public class AnimatedItemSwapper : IItemSwapper<IGridSlot>
     {
         private const float SwapDuration = 0.2f;
 
-        public async UniTask SwapItemsAsync(IUnityGridSlot gridSlot1, IUnityGridSlot gridSlot2,
+        public async UniTask SwapItemsAsync(IGridSlot gridSlot1, IGridSlot gridSlot2,
             CancellationToken cancellationToken = default)
         {
             var item1 = gridSlot1.Item;

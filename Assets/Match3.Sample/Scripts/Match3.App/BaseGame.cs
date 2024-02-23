@@ -1,7 +1,12 @@
 using System;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using Match3;
 using Match3;
 using Match3;
+using UnityEngine;
 
 namespace Match3
 {
@@ -12,12 +17,20 @@ namespace Match3
         private readonly ILevelGoalsProvider<TGridSlot> _levelGoalsProvider;
         private readonly IGameBoardDataProvider<TGridSlot> _gameBoardDataProvider;
         private readonly ISolvedSequencesConsumer<TGridSlot>[] _solvedSequencesConsumers;
+        
+        private readonly JobsExecutor _jobsExecutor;
+        private readonly IItemSwapper<TGridSlot> _itemSwapper;
+
+        private AsyncLazy _swapItemsTask;
+        private IBoardFillStrategy<TGridSlot> _fillStrategy;
 
         private bool _isStarted;
         private int _achievedGoals;
 
         private LevelGoal<TGridSlot>[] _levelGoals;
 
+        private Sprite[] _sprites;
+        
         protected BaseGame(GameConfig<TGridSlot> config)
         {
             _gameBoard = new GameBoard<TGridSlot>();
@@ -26,30 +39,55 @@ namespace Match3
             _levelGoalsProvider = config.LevelGoalsProvider;
             _gameBoardDataProvider = config.GameBoardDataProvider;
             _solvedSequencesConsumers = config.SolvedSequencesConsumers;
+            _itemSwapper = config.ItemSwapper;
+            _jobsExecutor = new JobsExecutor();
         }
 
         protected IGameBoard<TGridSlot> GameBoard => _gameBoard;
 
+        protected bool IsSwapItemsCompleted
+        {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get => _swapItemsTask == null || _swapItemsTask.Task.Status.IsCompleted();
+        }
         public event EventHandler Finished;
         public event EventHandler<LevelGoal<TGridSlot>> LevelGoalAchieved;
 
-        public void InitGameLevel(int level)
+        public void InitGameLevel(int level, Sprite[] sprites)
         {
             if (_isStarted)
             {
                 throw new InvalidOperationException("Can not be initialized while the current game is active.");
             }
 
+            _sprites = sprites;
             _gameBoard.SetGridSlots(_gameBoardDataProvider.GetGameBoardSlots(level));
             _levelGoals = _levelGoalsProvider.GetLevelGoals(level, _gameBoard);
         }
 
-        protected void StartGame()
+        public Sprite[] GetSprite()
+        {
+            return _sprites;
+        }
+        
+        public void SetGameBoardFillStrategy(IBoardFillStrategy<TGridSlot> fillStrategy)
+        {
+            _fillStrategy = fillStrategy;
+        }
+
+        public async UniTask StartAsync(CancellationToken cancellationToken = default)
         {
             if (_isStarted)
             {
                 throw new InvalidOperationException("Game has already been started.");
             }
+
+            if (_fillStrategy == null)
+            {
+                throw new NullReferenceException(nameof(_fillStrategy));
+            }
+
+            await FillAsync(_fillStrategy, cancellationToken);
 
             foreach (var levelGoal in _levelGoals)
             {
@@ -60,11 +98,16 @@ namespace Match3
             OnGameStarted();
         }
 
-        protected void StopGame()
+        public async UniTask StopAsync()
         {
             if (_isStarted == false)
             {
                 throw new InvalidOperationException("Game has not been started.");
+            }
+            
+            if (IsSwapItemsCompleted == false)
+            {
+                await _swapItemsTask;
             }
 
             foreach (var levelGoal in _levelGoals)
@@ -75,7 +118,7 @@ namespace Match3
             _isStarted = false;
             OnGameStopped();
         }
-
+        
         public void ResetGameBoard()
         {
             _achievedGoals = 0;
@@ -115,6 +158,7 @@ namespace Match3
         protected virtual void OnAllGoalsAchieved()
         {
             Finished?.Invoke(this, EventArgs.Empty);
+            RaiseGameFinishedAsync().Forget();
         }
 
         private void OnLevelGoalAchieved(object sender, EventArgs e)
@@ -126,6 +170,63 @@ namespace Match3
             {
                 OnAllGoalsAchieved();
             }
+        }
+        
+        protected UniTask SwapItemsAsync(GridPosition position1, GridPosition position2,
+            CancellationToken cancellationToken = default)
+        {
+            if (_swapItemsTask?.Task.Status.IsCompleted() ?? true)
+            {
+                _swapItemsTask = SwapItemsAsync(_fillStrategy, position1, position2, cancellationToken).ToAsyncLazy();
+            }
+
+            return _swapItemsTask.Task;
+        }
+
+        protected virtual async UniTask SwapItemsAsync(IBoardFillStrategy<TGridSlot> fillStrategy, GridPosition position1,
+            GridPosition position2, CancellationToken cancellationToken = default)
+        {
+            await SwapGameBoardItemsAsync(position1, position2, cancellationToken);
+
+            if (IsSolved(position1, position2, out var solvedData))
+            {
+                NotifySequencesSolved(solvedData);
+                await ExecuteJobsAsync(fillStrategy.GetSolveJobs(GameBoard, solvedData), cancellationToken);
+            }
+            else
+            {
+                await SwapGameBoardItemsAsync(position1, position2, cancellationToken);
+            }
+        }
+
+        protected async UniTask SwapGameBoardItemsAsync(GridPosition position1, GridPosition position2,
+            CancellationToken cancellationToken = default)
+        {
+            var gridSlot1 = GameBoard[position1.RowIndex, position1.ColumnIndex];
+            var gridSlot2 = GameBoard[position2.RowIndex, position2.ColumnIndex];
+
+            await _itemSwapper.SwapItemsAsync(gridSlot1, gridSlot2, cancellationToken);
+        }
+
+        protected UniTask ExecuteJobsAsync(IEnumerable<IJob> jobs, CancellationToken cancellationToken = default)
+        {
+            return _jobsExecutor.ExecuteJobsAsync(jobs, cancellationToken);
+        }
+
+        private async UniTask RaiseGameFinishedAsync()
+        {
+            if (IsSwapItemsCompleted == false)
+            {
+                await _swapItemsTask;
+            }
+
+            OnAllGoalsAchieved();
+        }
+        
+        private async UniTask FillAsync(IBoardFillStrategy<TGridSlot> fillStrategy,
+            CancellationToken cancellationToken = default)
+        {
+            await ExecuteJobsAsync(fillStrategy.GetFillJobs(GameBoard), cancellationToken);
         }
     }
 }

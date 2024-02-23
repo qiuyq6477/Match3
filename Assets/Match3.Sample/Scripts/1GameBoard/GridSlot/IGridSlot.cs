@@ -11,5 +11,14 @@ namespace Match3
 
         IGridSlotState State { get; }
         GridPosition GridPosition { get; }
+        
+        bool CanSetItem { get; }
+        bool NotAvailable { get; }
+
+        IItem Item { get; }
+
+        void SetItem(IItem item);
+        void SetState(IGridSlotState state);
+        void Clear();
     }
 }

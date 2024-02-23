@@ -8,13 +8,13 @@ using UnityEngine;
 
 namespace Match3
 {
-    public class TileItemsPool
+    public class GridTilePool
     {
         private readonly Transform _itemsContainer;
         private readonly Dictionary<TileGroup, GameObject> _tilePrefabs;
         private readonly Dictionary<TileGroup, Queue<IGridTile>> _itemsPool;
 
-        public TileItemsPool(IReadOnlyCollection<TileModel> tiles, Transform itemsContainer)
+        public GridTilePool(IReadOnlyCollection<TileModel> tiles, Transform itemsContainer)
         {
             _itemsContainer = itemsContainer;
             _itemsPool = new Dictionary<TileGroup, Queue<IGridTile>>(tiles.Count);

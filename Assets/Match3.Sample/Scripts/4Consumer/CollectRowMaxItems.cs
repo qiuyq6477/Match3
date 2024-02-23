@@ -6,20 +6,20 @@ using UnityEngine;
 
 namespace Match3
 {
-    public class CollectRowMaxItems : LevelGoal<IUnityGridSlot>
+    public class CollectRowMaxItems : LevelGoal<IGridSlot>
     {
         private readonly int _maxRowLength;
 
-        public CollectRowMaxItems(IGameBoard<IUnityGridSlot> gameBoard)
+        public CollectRowMaxItems(IGameBoard<IGridSlot> gameBoard)
         {
             _maxRowLength = GetMaxRowLength(gameBoard);
         }
 
-        public override void OnSequencesSolved(SolvedData<IUnityGridSlot> solvedData)
+        public override void OnSequencesSolved(SolvedData<IGridSlot> solvedData)
         {
             foreach (var sequence in solvedData.SolvedSequences)
             {
-                if (sequence.SequenceDetectorType != typeof(HorizontalLineDetector<IUnityGridSlot>))
+                if (sequence.SequenceDetectorType != typeof(HorizontalLineDetector<IGridSlot>))
                 {
                     continue;
                 }
@@ -31,7 +31,7 @@ namespace Match3
             }
         }
 
-        private int GetMaxRowLength(IGameBoard<IUnityGridSlot> gameBoard)
+        private int GetMaxRowLength(IGameBoard<IGridSlot> gameBoard)
         {
             var maxRowLength = 0;
 

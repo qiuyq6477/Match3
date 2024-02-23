@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Match3
 {
-    public class UnityGameBoardRenderer : MonoBehaviour, IGameBoardDataProvider<IUnityGridSlot>// , IUnityGameBoardRenderer
+    public class UnityGameBoardRenderer : MonoBehaviour, IGameBoardDataProvider<IGridSlot>// , IUnityGameBoardRenderer
     {
         [Space]
         [SerializeField] private int _rowCount = 9;
@@ -22,17 +22,17 @@ namespace Match3
         [SerializeField] private TileModel[] _gridTiles;
 
         private IGridTile[,] _gridSlotTiles;
-        private IUnityGridSlot[,] _gameBoardSlots;
+        private IGridSlot[,] _gameBoardSlots;
 
         private Vector3 _originPosition;
-        private TileItemsPool _tileItemsPool;
+        private GridTilePool _gridTilePool;
 
         private void Awake()
         {
-            _tileItemsPool = new TileItemsPool(_gridTiles, transform);
+            _gridTilePool = new GridTilePool(_gridTiles, transform);
         }
 
-        public IUnityGridSlot[,] GetGameBoardSlots(int level)
+        public IGridSlot[,] GetGameBoardSlots(int level)
         {
             return _gameBoardSlots;
         }
@@ -40,7 +40,7 @@ namespace Match3
         public void CreateGridTiles(int[,] data)
         {
             _gridSlotTiles = new IGridTile[_rowCount, _columnCount];
-            _gameBoardSlots = new IUnityGridSlot[_rowCount, _columnCount];
+            _gameBoardSlots = new IGridSlot[_rowCount, _columnCount];
             _originPosition = GetOriginPosition(_rowCount, _columnCount);
 
             CreateGridTiles(TileGroup.Available);
@@ -141,7 +141,7 @@ namespace Match3
 
                     _gridSlotTiles[rowIndex, columnIndex] = gridTile;
                     _gameBoardSlots[rowIndex, columnIndex] =
-                        new UnityGridSlot(gridTile, new GridPosition(rowIndex, columnIndex));
+                        new GridSlot(gridTile, new GridPosition(rowIndex, columnIndex));
                 }
             }
         }
@@ -162,7 +162,7 @@ namespace Match3
             var currentTile = _gridSlotTiles[rowIndex, columnIndex];
             if (currentTile != null)
             {
-                _tileItemsPool.ReturnGridTile(currentTile);
+                _gridTilePool.ReturnGridTile(currentTile);
             }
 
             var gridTile = NewTile(rowIndex, columnIndex, group);
@@ -173,7 +173,7 @@ namespace Match3
 
         private IGridTile NewTile(int rowIndex, int columnIndex, TileGroup group)
         {
-            var gridTile = _tileItemsPool.GetGridTile(group);
+            var gridTile = _gridTilePool.GetGridTile(group);
             gridTile.SetWorldPosition(rowIndex, columnIndex, GetWorldPosition(rowIndex, columnIndex));
 
             return gridTile;

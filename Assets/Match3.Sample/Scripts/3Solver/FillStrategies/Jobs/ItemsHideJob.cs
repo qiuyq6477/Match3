@@ -13,9 +13,9 @@ namespace Match3
         private const float FadeDuration = 0.15f;
         private const float ScaleDuration = 0.25f;
 
-        private readonly IEnumerable<IUnityItem> _items;
+        private readonly IEnumerable<IItem> _items;
 
-        public ItemsHideJob(IEnumerable<IUnityItem> items, int executionOrder = 0) : base(executionOrder)
+        public ItemsHideJob(IEnumerable<IItem> items, int executionOrder = 0) : base(executionOrder)
         {
             _items = items;
         }

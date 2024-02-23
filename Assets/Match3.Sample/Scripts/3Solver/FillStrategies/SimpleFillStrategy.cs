@@ -15,11 +15,11 @@ namespace Match3
 
         public override string Name => "Simple Fill Strategy";
 
-        public override IEnumerable<IJob> GetSolveJobs(IGameBoard<IUnityGridSlot> gameBoard,
-            SolvedData<IUnityGridSlot> solvedData)
+        public override IEnumerable<IJob> GetSolveJobs(IGameBoard<IGridSlot> gameBoard,
+            SolvedData<IGridSlot> solvedData)
         {
-            var itemsToHide = new List<IUnityItem>();
-            var itemsToShow = new List<IUnityItem>();
+            var itemsToHide = new List<IItem>();
+            var itemsToShow = new List<IItem>();
 
             foreach (var solvedGridSlot in solvedData.GetUniqueSolvedGridSlots(true))
             {

@@ -6,7 +6,7 @@ using Match3;
 
 namespace Match3
 {
-    public class StoneItemDetector : ISpecialItemDetector<IUnityGridSlot>
+    public class StoneItemDetector : ISpecialItemDetector<IGridSlot>
     {
         private readonly GridPosition[] _lookupDirections;
 
@@ -21,8 +21,8 @@ namespace Match3
             };
         }
 
-        public IEnumerable<IUnityGridSlot> GetSpecialItemGridSlots(IGameBoard<IUnityGridSlot> gameBoard,
-            IUnityGridSlot gridSlot)
+        public IEnumerable<IGridSlot> GetSpecialItemGridSlots(IGameBoard<IGridSlot> gameBoard,
+            IGridSlot gridSlot)
         {
             if (gridSlot.IsMovable == false)
             {
