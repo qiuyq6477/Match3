@@ -1,7 +1,4 @@
-using Match3;
-using Match3;
-
-namespace Match3.Core
+namespace Match3
 {
     public static class GridMath
     {

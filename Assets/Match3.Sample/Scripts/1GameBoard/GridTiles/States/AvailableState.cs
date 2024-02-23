@@ -1,5 +1,3 @@
-using Match3;
-
 namespace Match3
 {
     public class AvailableState : SpriteGridTile

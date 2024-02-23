@@ -1,6 +1,4 @@
-﻿using Match3;
-using Match3;
-
+﻿
 namespace Match3
 {
     public interface IGameBoard<out TGridSlot> : IGrid where TGridSlot : IGridSlot

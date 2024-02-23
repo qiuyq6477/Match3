@@ -1,7 +1,3 @@
-using Match3;
-using Match3;
-using Match3;
-using Match3;
 
 namespace Match3
 {

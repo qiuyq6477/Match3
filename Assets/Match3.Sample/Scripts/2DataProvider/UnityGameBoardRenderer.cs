@@ -1,10 +1,4 @@
 using System;
-using Match3;
-using Match3;
-using Match3;
-using Match3;
-using Match3.Core;
-using Match3;
 using UnityEngine;
 
 namespace Match3

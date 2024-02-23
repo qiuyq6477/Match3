@@ -1,6 +1,4 @@
-﻿using Match3;
-
-namespace Match3
+﻿namespace Match3
 {
     public interface IGrid
     {

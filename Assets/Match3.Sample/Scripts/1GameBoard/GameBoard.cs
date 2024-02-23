@@ -1,9 +1,5 @@
 using System;
 using System.Runtime.CompilerServices;
-using Match3;
-using Match3.Core;
-using Match3;
-using Match3;
 
 namespace Match3
 {
